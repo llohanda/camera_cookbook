@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
@@ -92,6 +94,18 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
             await _initializeControllerFuture;
             // Take a picture and get the file's location
             final image = await _controller.takePicture();
+
+            if (!context.mounted) return;
+            // Display the picture on the next screen
+            await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder:
+                    (context) => DisplayPictureScreen(
+                      // Pass the automatically generated path to the display widget
+                      imagePath: image.path,
+                    ),
+              ),
+            );
           } catch (e) {
             debugPrint(e.toString());
           }
@@ -99,6 +113,23 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
         child: const Icon(Icons.camera_alt),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+}
+
+class DisplayPictureScreen extends StatelessWidget {
+  final String imagePath;
+
+  const DisplayPictureScreen({super.key, required this.imagePath});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text('Display the Picture'),
+      ),
+      body: Center(child: Image.file(File(imagePath))),
     );
   }
 }
