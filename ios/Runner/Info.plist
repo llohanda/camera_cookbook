@@ -47,7 +47,11 @@
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>Very important to get access to your camera.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Not important, just in case you need to record audio.</string>
+	<!-- <key>NSMicrophoneUsageDescription</key>
+	<string>Not important, just in case you need to record audio.</string> -->
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Enable saving images to your camera roll</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Enable saving images to your camera roll</string>
 </dict>
 </plist>
