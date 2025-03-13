@@ -46,8 +46,8 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSCameraUsageDescription</key>
-	<string>Explanation on why the camera access is needed.</string>
+	<string>Very important to get access to your camera.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Explanation on why the microphone access is needed.</string>
+	<string>Not important, just in case you need to record audio.</string>
 </dict>
 </plist>
