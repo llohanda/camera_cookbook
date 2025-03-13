@@ -18,13 +18,13 @@ void main() async {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
       ),
-      home: TakePicturePage(camera: firstCamera),
+      home: TakePictureScreen(camera: firstCamera),
     ),
   );
 }
 
-class TakePicturePage extends StatefulWidget {
-  const TakePicturePage({
+class TakePictureScreen extends StatefulWidget {
+  const TakePictureScreen({
     super.key,
     required this.camera,
     this.title = 'Camera Demo Home Page',
@@ -34,10 +34,10 @@ class TakePicturePage extends StatefulWidget {
   final String title;
 
   @override
-  State<TakePicturePage> createState() => _TakePicturePageState();
+  State<TakePictureScreen> createState() => _TakePictureScreenState();
 }
 
-class _TakePicturePageState extends State<TakePicturePage> {
+class _TakePictureScreenState extends State<TakePictureScreen> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
   int _counter = 0;
@@ -84,6 +84,21 @@ class _TakePicturePageState extends State<TakePicturePage> {
           },
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          // Try taking pictures and handle any error
+          try {
+            // Ensure the camera is initialized
+            await _initializeControllerFuture;
+            // Take a picture and get the file's location
+            final image = await _controller.takePicture();
+          } catch (e) {
+            debugPrint(e.toString());
+          }
+        },
+        child: const Icon(Icons.camera_alt),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
